@@ -160,8 +160,9 @@ class RobotDiff(RobotBase):
             real_vel = vel
 
         coefficient_vel = np.zeros((3, 2))
-        coefficient_vel[0, 0] = cos(current_state[2, 0])
-        coefficient_vel[1, 0] = sin(current_state[2, 0])
+        theta = current_state[2, 0] + 0.5 * real_vel[1,0] * step_time
+        coefficient_vel[0, 0] = cos(theta)
+        coefficient_vel[1, 0] = sin(theta)
         coefficient_vel[2, 1] = 1
 
         next_state = current_state + coefficient_vel @ real_vel * step_time
